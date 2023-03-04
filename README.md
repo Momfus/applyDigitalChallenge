@@ -10,7 +10,7 @@ The design details and specifications like font family, size, colors, etc., as w
 - User: recruitment@reign.cl
 - Password: reignrecruitment!
 
-##STACK
+## STACK
 
 You must use the following technologies to build the app:
 
@@ -19,7 +19,7 @@ You must use the following technologies to build the app:
 - Deployment of the web app on Netlify from your Git repository using the New Site
   from Git workflow
 
-##API
+## API
 
 The web application must request data to the Hackers [News public API](https://hn.algolia.com/api). The dropdown selector component should use the URL parameter “query” from the “search by date”
 
@@ -33,7 +33,7 @@ The pagination should be implemented using the “page” URL parameter from thi
 
 The attributes to use for the post UI are author, story_title, story_url, created_at. If any of these attributes are not present in the object response, the post should be discarded from the data.
 
-##FUNCTIONALITY
+## FUNCTIONALITY
 
 - The selected filter should persist on the local storage
 - The favorited posts should persist on the local storage
@@ -43,13 +43,13 @@ The attributes to use for the post UI are author, story_title, story_url, create
 - Clicking on the “like button” should not trigger the opening of the post URL link
 - When hovering on the row, apply opacity to the entire row and its children (texts, icons, like button, etc)
 
-##BONUS
+## BONUS
 
 * Implement unit testing
 * Good use of Typescript
 * Pagination as infinite scroll
 
-##WHAT WILL BE EVALUATED
+## WHAT WILL BE EVALUATED
 
 * Documentation
 * Testing
@@ -58,7 +58,7 @@ The attributes to use for the post UI are author, story_title, story_url, create
 * Git history
 * Solution deployed
 
-##DELIVERABLES
+## DELIVERABLES
 
 * Netlify link to the deployed web application
 * Public GitHub / GitLab / Bitbucket repository URL

@@ -10,6 +10,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { PostListsComponent } from './pages/post-lists/post-lists.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PostCardComponent } from './shared/post-card/post-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PostCardComponent } from './shared/post-card/post-card.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AngularMaterialModule
   ],
   providers: [],

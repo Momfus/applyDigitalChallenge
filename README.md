@@ -4,7 +4,6 @@
 
 The design details and specifications like font family, size, colors, etc., as well as the assets to build the UI, are available on Zeplin using the following information:
 
-The design details and specifications like font family, size, colors, etc., as well as the assets to build the UI, are available on Zeplin using the following information:
 
 - Project: [https://zpl.io/2vJKgqQ](https://zpl.io/2vJKgqQ)
 - User: recruitment@reign.cl

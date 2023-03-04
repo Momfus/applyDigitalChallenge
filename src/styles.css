@@ -22,3 +22,13 @@ app-root {
 .container {
   margin: 20px;
 }
+
+.d-flex {
+
+  display: flex;
+
+}
+
+.d-flex--space-between {
+  justify-content: space-between;
+}

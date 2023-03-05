@@ -1,6 +1,4 @@
-
 .posts-results {
-
-  height: 300px;
-  overflow-y: scroll;
+  max-height: 80vh;
+  overflow-y: auto;
 }

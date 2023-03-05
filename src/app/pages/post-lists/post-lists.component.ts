@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PostListsComponent implements OnInit {
 
   posts: Hit[] = [];
-  currentPage: number = 0;
+  isLoading: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -20,12 +20,13 @@ export class PostListsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadPosts();
+    this.loadPosts(10);
 
   }
 
-  loadPosts() {
-    this.postService.getPosts().subscribe(
+  loadPosts( perPage: number = 10) {
+    this.isLoading = true;
+    this.postService.getPosts(perPage).subscribe(
       {
 
         next: ( (res: PostResultsSearch) => {
@@ -34,6 +35,9 @@ export class PostListsComponent implements OnInit {
         }),
         error: (error: string) => {
           this.showErrorSnackBar(error);
+        },
+        complete: () => {
+          this.isLoading = false;
         }
 
       })
@@ -49,10 +53,10 @@ export class PostListsComponent implements OnInit {
     });
   }
 
-  onScroll(ev: any) {
-    // this.loadPosts();
-    console.log('scroll')
-    console.log(ev)
+  onScroll() {
+    if( !this.isLoading ) {
+      this.loadPosts();
+    }
   }
 
 }

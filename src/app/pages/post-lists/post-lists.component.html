@@ -4,6 +4,8 @@
 
 <div>Filter selector</div>
 
+<br />
+<br />
 <div
   class="posts-results"
   infiniteScroll
@@ -12,9 +14,7 @@
   [infiniteScrollThrottle]="500"
   [infiniteScrollDistance]="1"
 >
-
   <ng-container *ngFor="let post of posts">
     <app-post-card></app-post-card>
   </ng-container>
-
 </div>

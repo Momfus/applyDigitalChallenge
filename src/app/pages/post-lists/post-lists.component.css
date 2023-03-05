@@ -1,4 +1,14 @@
 .posts-results {
   max-height: 80vh;
   overflow-y: auto;
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+app-post-card {
+  overflow-x: auto;
 }

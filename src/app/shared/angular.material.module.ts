@@ -6,7 +6,17 @@ import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, MatSnackBarModule, MatButtonModule, MatCardModule],
-  exports: [MatSnackBarModule, MatButtonModule, MatCardModule],
+  imports: [
+    CommonModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatCardModule,
+  ],
+  exports: [
+    MatSnackBarModule,
+    MatButtonModule,
+    MatCardModule,
+
+  ],
 })
 export class AngularMaterialModule {}

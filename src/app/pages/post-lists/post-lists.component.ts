@@ -20,7 +20,7 @@ export class PostListsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadPosts(10);
+    this.loadPosts(20);
 
   }
 

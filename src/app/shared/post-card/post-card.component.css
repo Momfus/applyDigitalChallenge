@@ -1,6 +1,13 @@
 
 mat-card {
   margin: 2em;
-  width: 50%;
+  min-width: 450px;
+  max-width: 600px;
 }
 
+@media (max-width: 720px) {
+  mat-card {
+    min-width: 75vw;
+    max-width: 75vw;
+  }
+}

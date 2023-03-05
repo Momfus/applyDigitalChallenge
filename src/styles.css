@@ -45,3 +45,26 @@ app-root {
   justify-content: center;
 
 }
+
+/* Scroll style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 10px;
+  scrollbar-color: #555 #eee;
+}
+
+/* only for firefox */
+* {
+  scrollbar-width: 6px;
+  scrollbar-color: #555 #eee;
+}

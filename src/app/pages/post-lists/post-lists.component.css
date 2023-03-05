@@ -1,0 +1,23 @@
+.posts-results {
+  max-height: 80vh;
+  overflow-y: auto;
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+app-post-card {
+  overflow-x: auto;
+}
+
+
+
+@media (max-width: 720px) {
+  .filter__center-media{
+    display: flex;
+    justify-content: center;
+  }
+}

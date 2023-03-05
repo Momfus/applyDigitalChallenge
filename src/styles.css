@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
+:root {
+  --brownish-grey: #6b6b6b;
+}
 
 html,
 body {

@@ -3,6 +3,9 @@ import { PostService } from '../../services/post.service';
 import { Hit } from '../../models/post.model';
 import { PostResultsSearch } from '../../models/post-results.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TechTypeOption } from '../../models/tech-type-option.model';
+import { MatSelectChange } from '@angular/material/select';
+
 @Component({
   selector: 'app-post-lists',
   templateUrl: './post-lists.component.html',
@@ -11,7 +14,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PostListsComponent implements OnInit {
 
   posts: Hit[] = [];
-  isLoading: boolean = false;
+  isLoadingScrolling: boolean = false; // Extra helper for the infinite scroller trigger event
+
+
+  technologyTypes: TechTypeOption[] = [
+    {value: '', viewValue: 'Any', icon: ''},
+    {value: 'angular', viewValue: 'Angular', icon: 'assets/logos/angular-logo.png'},
+    {value: 'reactjs', viewValue: 'ReactJs', icon: 'assets/logos/react-logo.png'},
+    {value: 'vuejs', viewValue: 'VueJs', icon: 'assets/logos/vue-logo.png'}
+  ]
+
+  selectedTechType: TechTypeOption = this.technologyTypes[0];
 
   constructor(
     private postService: PostService,
@@ -20,24 +33,23 @@ export class PostListsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadPosts(20);
-
+    this.loadPostsFromApi(20);
   }
 
-  loadPosts( perPage: number = 10) {
-    this.isLoading = true;
-    this.postService.getPosts(perPage).subscribe(
+  loadPostsFromApi( perPage: number = 10, technologyFilter='') {
+    this.isLoadingScrolling = true;
+    this.postService.getPosts(perPage,technologyFilter).subscribe(
       {
 
         next: ( (res: PostResultsSearch) => {
+          console.log(res.hits);
           this.posts = [...this.posts, ...res.hits];
-          console.log(this.posts);
         }),
         error: (error: string) => {
           this.showErrorSnackBar(error);
         },
         complete: () => {
-          this.isLoading = false;
+          this.isLoadingScrolling = false;
         }
 
       })
@@ -54,9 +66,18 @@ export class PostListsComponent implements OnInit {
   }
 
   onScroll() {
-    if( !this.isLoading ) {
-      this.loadPosts();
+    if( !this.isLoadingScrolling ) {
+      this.loadPostsFromApi();
     }
+  }
+
+  onFilterTechnologyChange() {
+
+
+    this.posts = [];
+    this.postService.resetSerch();
+    this.loadPostsFromApi( 20, this.selectedTechType.value);
+
   }
 
 }

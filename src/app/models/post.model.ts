@@ -26,5 +26,6 @@ export interface Hit {
     url: HighlightResult;
     author: HighlightResult;
   };
+  like: boolean;
 }
 

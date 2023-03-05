@@ -1,9 +1,35 @@
-<div>Toggle button</div>
+<div class="filter__center-media">Toggle button</div>
 
 <br />
+<mat-form-field
+  appearance="outline"
+  class="filter__center-media"
+>
+  <mat-label>Technology Type</mat-label>
+  <mat-select [(ngModel)]="selectedTechType"
+  (selectionChange)="onFilterTechnologyChange()">
 
-<div>Filter selector</div>
 
+  <mat-select-trigger>
+    <div class="d-flex d-flex--alignItemsCenter">
+      <img *ngIf="selectedTechType.icon" [src]="selectedTechType.icon" alt="{{ selectedTechType.viewValue }} logo" height="20" style="margin-right: 0.25em;"/>
+      {{ selectedTechType.viewValue }}
+    </div>
+  </mat-select-trigger>
+
+    <mat-option *ngFor="let type of technologyTypes" [value]="type">
+
+      <div class="d-flex d-flex--alignItemsCenter">
+        <img *ngIf="type.icon != '' " [src]="type.icon" alt="ReactJs logo" height="20" style="margin-right: 0.25em;"/>
+        {{ type.viewValue }}
+      </div>
+
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+<br />
 <br />
 <br />
 <div
@@ -15,6 +41,6 @@
   [infiniteScrollDistance]="1"
 >
   <ng-container *ngFor="let post of posts; let i = index">
-    <app-post-card [post]="i"></app-post-card>
+    <app-post-card [post]="post"></app-post-card>
   </ng-container>
 </div>

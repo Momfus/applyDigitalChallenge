@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Hit } from '../../models/post.model';
 
 @Component({
   selector: 'app-post-card',
@@ -7,6 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class PostCardComponent {
 
-  @Input() post: number = 0;
+  @Input() post!: Hit | null;
 
 }

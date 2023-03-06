@@ -12,7 +12,12 @@
   justify-content: space-between;
   flex-direction: row;
 
+  cursor: pointer;
 
+}
+
+.card:hover {
+  opacity: 0.6;
 }
 
 

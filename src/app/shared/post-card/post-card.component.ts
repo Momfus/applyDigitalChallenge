@@ -51,12 +51,22 @@ export class PostCardComponent implements OnInit {
 
   }
 
-  onFavsChange() {
+  onFavsChange(event: Event) {
+
+    event.stopPropagation();
 
     if( this.post ) {
 
       this.post.liked = !this.post.liked;
       this.postLikedChange.emit();
+    }
+
+  }
+
+  onOpenStoryLink() {
+
+    if (this.post.story_url) {
+      window.open(this.post.story_url, '_blank');
     }
 
   }

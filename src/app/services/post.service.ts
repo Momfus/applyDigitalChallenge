@@ -32,7 +32,7 @@ export class PostService {
         // The attributes to use for the post UI are author, story_title, story_url, created_at (the API manual don't give any information how to filter the null values)
         resSearch.hits = resSearch.hits.filter(post => post.author && post.story_title && post.story_url && post.created_at);
         resSearch.hits =  resSearch.hits.map(post => {
-          const liked = localStorage.getItem(post.objectID) === 'true';
+          const liked = this.checkLikedPost(post.objectID);
           return { ...post, liked };
         });
 
@@ -47,6 +47,16 @@ export class PostService {
         return throwError(() => new Error('Error getting data'));
       })
     )
+
+  }
+
+  private checkLikedPost(postId: string): boolean {
+
+    //localStorage.getItem('postFavsList')
+    const postFavsList = JSON.parse(localStorage.getItem('postFavsList') || '[]');
+    const postLiked = postFavsList.find((post: any) => post.objectID === postId);
+    return !!postLiked;
+
 
   }
 

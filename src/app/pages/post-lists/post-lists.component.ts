@@ -20,8 +20,7 @@ export class PostListsComponent implements OnInit, OnDestroy {
 
   favsList$!: Subscription;
 
-  isLoadingScrolling: boolean = false; // Extra helper for the infinite scroller trigger event
-
+  isLoadingScrolling: boolean = true; // Extra helper for the infinite scroller trigger event
 
   selectedTechType: TechTypeOption = { value: '', viewValue: 'Any', icon: '' };
 

@@ -5,10 +5,16 @@ import { PostService } from '../../../services/post.service';
 @Component({
   selector: 'app-tech-type-select',
   templateUrl: './tech-type-select.component.html',
-  styleUrls: ['./tech-type-select.component.css'],
+  styles: [`
+    @media (max-width: 720px) {
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  `]
 })
 export class TechTypeSelectComponent implements OnInit {
-  @Input() selectedTechType!: TechTypeOption;
+  @Input() selectedTechType: TechTypeOption = { value: '', viewValue: 'Any', icon: '' };
   @Output() selectedTechTypeChange = new EventEmitter<TechTypeOption>();
 
   technologyTypes: TechTypeOption[] = [

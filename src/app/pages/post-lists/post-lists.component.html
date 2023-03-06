@@ -9,6 +9,7 @@
 
 <app-tech-type-select
   *ngIf="searchType === 'all'"
+  class="filter__center-media"
   [(selectedTechType)]="selectedTechType"
   (selectedTechTypeChange)="onFilterTechnologyChange()"
 ></app-tech-type-select>
@@ -29,6 +30,12 @@
       [post]="post"
       (postLikedChange)="onPostLikedChange(post)"
     ></app-post-card>
+
+
+    <div *ngIf="posts.length === 0 && !isLoadingScrolling">
+      <h2>No posts were found</h2>
+    </div>
+
   </ng-container>
 
   <!-- Favs -->
@@ -38,7 +45,13 @@
       [post]="post"
       (postLikedChange)="onPostLikedChange(post)"
     ></app-post-card>
+
+    <div *ngIf="postFavList.length === 0" >
+      <h2>No favorite post added</h2>
+    </div>
+
   </ng-template>
 </div>
+
 
 <br />

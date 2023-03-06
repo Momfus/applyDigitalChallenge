@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostService } from '../../services/post.service';
-import { Hit } from '../../models/post.model';
+import { Post } from '../../models/post.model';
 import { PostResultsSearch } from '../../models/post-results.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TechTypeOption, SearchType } from '../../models/tech-type-option.model';
@@ -12,7 +12,7 @@ import { TechTypeOption, SearchType } from '../../models/tech-type-option.model'
 })
 export class PostListsComponent implements OnInit {
 
-  posts: Hit[] = [];
+  posts: Post[] = [];
   isLoadingScrolling: boolean = false; // Extra helper for the infinite scroller trigger event
 
 
@@ -58,7 +58,7 @@ export class PostListsComponent implements OnInit {
       this.postService.getPosts(perPage,technologyFilter).subscribe(
         {
 
-          next: ( (res: Hit[]) => {
+          next: ( (res: Post[]) => {
             this.posts = res;
           }),
           error: (error: string) => {
@@ -116,6 +116,13 @@ export class PostListsComponent implements OnInit {
       this.loadPostsFromLocalStorage();
 
     }
+
+  }
+
+  onPostLikedChange(post: Post ) {
+
+    console.log(post);
+
 
   }
 

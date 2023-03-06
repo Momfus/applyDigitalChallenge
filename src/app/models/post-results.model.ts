@@ -1,7 +1,7 @@
-import { Hit } from './post.model';
+import { Post } from './post.model';
 
 export interface PostResultsSearch {
-  hits: Hit[];
+  hits: Post[];
   nbHits: number;
   page: number;
   nbPages: number;

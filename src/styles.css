@@ -28,9 +28,7 @@ app-root {
 }
 
 .d-flex {
-
   display: flex;
-
 }
 
 .d-flex--alignItemsCenter {
@@ -43,6 +41,10 @@ app-root {
 
 .d-flex--space-between {
   justify-content: space-between;
+}
+
+.d-flex--dir-column {
+  flex-direction: column;
 }
 
 .overlay {

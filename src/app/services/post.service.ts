@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams  } from '@angular/common/http';
-import { Hit } from '../models/post.model';
+import { Post } from '../models/post.model';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { PostResultsSearch } from '../models/post-results.model';
@@ -14,7 +14,7 @@ export class PostService {
   // More info about the API: https://hn.algolia.com/api
   private baseUrl: string = 'https://hn.algolia.com/api/v1' // Default: by revelance, then points, then number of comments.
   private page: number = 0;
-  private postsHR: Hit[] = [];
+  private postsHR: Post[] = [];
 
   private searchtype: string = 'search_by_date'
 
@@ -22,7 +22,7 @@ export class PostService {
     private http: HttpClient
   ) {}
 
-  public getPosts(perPage: number, technologyType=''): Observable<Hit[]> {
+  public getPosts(perPage: number, technologyType=''): Observable<Post[]> {
 
     const url = `${this.baseUrl}/${this.searchtype}?query=${technologyType}&page=${this.page}&hitsPerPage=${perPage}`;
 
@@ -55,7 +55,7 @@ export class PostService {
     this.postsHR = [];
   }
 
-  public get postsList(): Hit[] {
+  public get postsList(): Post[] {
     return this.postsHR;
   }
 

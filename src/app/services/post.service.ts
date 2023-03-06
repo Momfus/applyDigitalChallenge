@@ -13,8 +13,8 @@ export class PostService {
 
   // More info about the API: https://hn.algolia.com/api
   private baseUrl: string = 'https://hn.algolia.com/api/v1' // Default: by revelance, then points, then number of comments.
-
   private page: number = 0;
+  private postsHR: Hit[] = [];
 
   private searchtype: string = 'search_by_date'
 
@@ -22,7 +22,7 @@ export class PostService {
     private http: HttpClient
   ) {}
 
-  public getPosts(perPage: number, technologyType=''): Observable<PostResultsSearch> {
+  public getPosts(perPage: number, technologyType=''): Observable<Hit[]> {
 
     const url = `${this.baseUrl}/${this.searchtype}?query=${technologyType}&page=${this.page}&hitsPerPage=${perPage}`;
 
@@ -36,8 +36,10 @@ export class PostService {
           return { ...post, liked };
         });
 
+        this.postsHR = this.postsHR.concat(resSearch.hits);
+
         this.page++;
-        return resSearch;
+        return this.postsHR;
 
       }),
       catchError( (error: HttpErrorResponse) => {
@@ -50,6 +52,15 @@ export class PostService {
 
   public resetSerch() {
     this.page = 0;
+    this.postsHR = [];
+  }
+
+  public get postsList(): Hit[] {
+    return this.postsHR;
+  }
+
+  public get postsListLength(): number {
+    return this.postsHR.length;
   }
 
   saveFilterTechnologySearch( techType: TechTypeOption ) {

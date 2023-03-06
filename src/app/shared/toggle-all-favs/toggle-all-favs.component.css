@@ -1,7 +1,7 @@
 button {
   display: flex;
   align-items: center;
-  border-radius: 2px;
+  border-radius: 1px;
   border: solid 1px #d6d6d6;
   background-color: transparent;
 }
@@ -21,19 +21,19 @@ button {
 
 
 .toggle-option.active {
-  border-radius: 2px;
-  border: solid 2px var(--azure);
+  border-radius: 1px;
+  border: solid 1px var(--azure);
   color: var(--azure);
 }
 
 .toggle-option:first-child.active {
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
   border-right: none;
 }
 
 .toggle-option:last-child.active {
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-top-right-radius: 1px;
+  border-bottom-right-radius: 1px;
   border-left: none;
 }

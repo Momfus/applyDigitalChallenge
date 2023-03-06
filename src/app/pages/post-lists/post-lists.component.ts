@@ -38,7 +38,7 @@ export class PostListsComponent implements OnInit {
     const techType = this.technologyTypes.find(type => type.value === savedSelectedType.value);
     this.selectedTechType = techType || this.selectedTechType;
 
-    this.loadPostsFromApi(20);
+    this.loadPostsFromApi(true, 20);
 
   }
 
@@ -46,23 +46,31 @@ export class PostListsComponent implements OnInit {
 
   }
 
-  loadPostsFromApi( perPage: number = 10, technologyFilter='') {
-    this.isLoadingScrolling = true;
-    this.postService.getPosts(perPage,technologyFilter).subscribe(
-      {
+  loadPostsFromApi( isNewData: boolean = true, perPage: number = 10, technologyFilter: string='') {
 
-        next: ( (res: PostResultsSearch) => {
-          console.log(res.hits);
-          this.posts = [...this.posts, ...res.hits];
-        }),
-        error: (error: string) => {
-          this.showErrorSnackBar(error);
-        },
-        complete: () => {
-          this.isLoadingScrolling = false;
-        }
+    if( !isNewData && this.postService.postsListLength > 0 ) {
 
-      })
+      this.posts = this.postService.postsList;
+
+    } else {
+
+      this.isLoadingScrolling = true;
+      this.postService.getPosts(perPage,technologyFilter).subscribe(
+        {
+
+          next: ( (res: Hit[]) => {
+            this.posts = res;
+          }),
+          error: (error: string) => {
+            this.showErrorSnackBar(error);
+          },
+          complete: () => {
+            this.isLoadingScrolling = false;
+          }
+
+        })
+
+    }
 
   }
 
@@ -83,7 +91,7 @@ export class PostListsComponent implements OnInit {
 
   onScroll() {
     if( !this.isLoadingScrolling ) {
-      this.loadPostsFromApi();
+      this.loadPostsFromApi(true);
     }
   }
 
@@ -93,7 +101,7 @@ export class PostListsComponent implements OnInit {
 
     this.posts = [];
     this.postService.resetSerch();
-    this.loadPostsFromApi( 20, this.selectedTechType.value);
+    this.loadPostsFromApi(true, 20, this.selectedTechType.value);
 
   }
 
@@ -101,13 +109,11 @@ export class PostListsComponent implements OnInit {
 
     console.log(value);
     if( value === 'all') {
-      this.posts = [];
-      this.postService.resetSerch();
-      this.loadPostsFromApi( 20);
+      this.loadPostsFromApi(false);
 
     } else {
 
-      this.loadPostsFromLocalStorage(20);
+      this.loadPostsFromLocalStorage();
 
     }
 

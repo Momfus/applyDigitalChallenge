@@ -22,22 +22,8 @@ export class PostListsComponent implements OnInit, OnDestroy {
 
   isLoadingScrolling: boolean = false; // Extra helper for the infinite scroller trigger event
 
-  technologyTypes: TechTypeOption[] = [
-    { value: '', viewValue: 'Any', icon: '' },
-    {
-      value: 'angular',
-      viewValue: 'Angular',
-      icon: 'assets/logos/angular-logo.png',
-    },
-    {
-      value: 'reactjs',
-      viewValue: 'ReactJs',
-      icon: 'assets/logos/react-logo.png',
-    },
-    { value: 'vuejs', viewValue: 'VueJs', icon: 'assets/logos/vue-logo.png' },
-  ];
 
-  selectedTechType: TechTypeOption = this.technologyTypes[0];
+  selectedTechType: TechTypeOption = { value: '', viewValue: 'Any', icon: '' };
 
   searchType: SearchType['postFavs'] = 'all';
 
@@ -48,15 +34,13 @@ export class PostListsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const savedSelectedType = this.postService.loadFilterTechnologySearch(
-      this.selectedTechType
-    );
-    const techType = this.technologyTypes.find(
-      (type) => type.value === savedSelectedType.value
-    );
-    this.selectedTechType = techType || this.selectedTechType;
 
-    this.loadPostsFromApi(true, 20);
+    this.selectedTechType = this.postService.loadFilterTechnologySearch(
+      { value: '', viewValue: 'Any', icon: '' },
+    );
+
+    this.loadPostsFromApi(true, 20, this.selectedTechType.value);
+
 
     // Subscribe to the changes made in the localstorage fav list (first get the ones that already have)
     this.postFavList = this.favsService.getFavs();
@@ -81,6 +65,7 @@ export class PostListsComponent implements OnInit, OnDestroy {
       this.posts = this.postService.postsList;
     } else {
       this.isLoadingScrolling = true;
+      console.log(technologyFilter)
       this.postService.getPosts(perPage, technologyFilter).subscribe({
         next: (res: Post[]) => {
           this.posts = res;
@@ -114,6 +99,7 @@ export class PostListsComponent implements OnInit, OnDestroy {
   }
 
   onFilterTechnologyChange() {
+
     this.postService.saveFilterTechnologySearch(this.selectedTechType);
 
     this.posts = [];

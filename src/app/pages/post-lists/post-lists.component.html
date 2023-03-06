@@ -1,38 +1,19 @@
 <div class="d-flex d-flex--justifyContentCenter">
-  <app-toggle-all-favs [selectedValue]="searchType" (valueChange)="onToggleSearchType($event)"></app-toggle-all-favs>
+  <app-toggle-all-favs
+    [selectedValue]="searchType"
+    (valueChange)="onToggleSearchType($event)"
+  ></app-toggle-all-favs>
 </div>
 
 <br />
-<mat-form-field
+
+<app-tech-type-select
   *ngIf="searchType === 'all'"
-  appearance="outline"
-  class="filter__center-media"
->
-  <mat-label>Technology Type</mat-label>
-  <mat-select [(ngModel)]="selectedTechType"
-  (selectionChange)="onFilterTechnologyChange()">
+  [(selectedTechType)]="selectedTechType"
+  (selectedTechTypeChange)="onFilterTechnologyChange()"
+></app-tech-type-select>
 
-
-  <mat-select-trigger>
-    <div class="d-flex d-flex--alignItemsCenter">
-      <img *ngIf="selectedTechType.icon" [src]="selectedTechType.icon" alt="{{ selectedTechType.viewValue }} logo" height="20" style="margin-right: 0.25em;"/>
-      {{ selectedTechType.viewValue }}
-    </div>
-  </mat-select-trigger>
-
-    <mat-option *ngFor="let type of technologyTypes" [value]="type">
-
-      <div class="d-flex d-flex--alignItemsCenter">
-        <img *ngIf="type.icon != '' " [src]="type.icon" alt="ReactJs logo" height="20" style="margin-right: 0.25em;"/>
-        {{ type.viewValue }}
-      </div>
-
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-
+<!-- List -->
 <div
   class="posts-results"
   infiniteScroll
@@ -41,13 +22,23 @@
   [infiniteScrollThrottle]="500"
   [infiniteScrollDistance]="2"
 >
+  <!-- All -->
   <ng-container *ngIf="searchType === 'all'; else showOnlyFavs">
-    <app-post-card *ngFor="let post of posts; let i = index" [post]="post" (postLikedChange)="onPostLikedChange(post)"></app-post-card>
+    <app-post-card
+      *ngFor="let post of posts; let i = index"
+      [post]="post"
+      (postLikedChange)="onPostLikedChange(post)"
+    ></app-post-card>
   </ng-container>
 
+  <!-- Favs -->
   <ng-template #showOnlyFavs>
-    <app-post-card *ngFor="let post of postFavList; let i = index" [post]="post" (postLikedChange)="onPostLikedChange(post)"></app-post-card>
+    <app-post-card
+      *ngFor="let post of postFavList; let i = index"
+      [post]="post"
+      (postLikedChange)="onPostLikedChange(post)"
+    ></app-post-card>
   </ng-template>
 </div>
 
-<br>
+<br />

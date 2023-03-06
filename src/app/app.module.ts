@@ -16,6 +16,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { FormsModule } from '@angular/forms';
 import { ToggleAllFavsComponent } from './shared/toggle-all-favs/toggle-all-favs.component';
+import { TechTypeSelectComponent } from './pages/post-lists/tech-type-select/tech-type-select.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ToggleAllFavsComponent } from './shared/toggle-all-favs/toggle-all-favs
     NotFoundComponent,
     PostCardComponent,
     SpinnerComponent,
-    ToggleAllFavsComponent
+    ToggleAllFavsComponent,
+    TechTypeSelectComponent
   ],
   imports: [
     BrowserModule,

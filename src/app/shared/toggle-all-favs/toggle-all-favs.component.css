@@ -1,0 +1,39 @@
+button {
+  display: flex;
+  align-items: center;
+  border-radius: 1px;
+  border: solid 1px #d6d6d6;
+  background-color: transparent;
+}
+
+.toggle-option {
+  display: inline-block;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  font-stretch: normal;
+  font-style: normal;
+  text-align: center;
+  color: #606060;
+  cursor: pointer;
+  width: 50%;
+}
+
+
+.toggle-option.active {
+  border-radius: 1px;
+  border: solid 1px var(--azure);
+  color: var(--azure);
+}
+
+.toggle-option:first-child.active {
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+  border-right: none;
+}
+
+.toggle-option:last-child.active {
+  border-top-right-radius: 1px;
+  border-bottom-right-radius: 1px;
+  border-left: none;
+}

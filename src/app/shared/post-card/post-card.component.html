@@ -1,6 +1,21 @@
-<div class="card">
-    <p class="title">{{ post?.story_title }}</p>
-    <div class="d-flex d-flex--alignItemsCenter like-button">
-      <button mat-button>LIKE</button>
+<div class="card" (click)="onOpenStoryLink()">
+  <div class="d-flex d-flex--dir-column">
+    <div
+      *ngIf="timeLapseText.length > 0"
+      class="time d-flex d-flex--alignItemsCenter">
+
+      <mat-icon>schedule</mat-icon>
+      <p style="margin: 0px">{{ timeLapseText }}</p>
+
     </div>
+    <p class="title">{{ post.story_title }}</p>
+  </div>
+
+  <button mat-button class="like-button" (click)="onFavsChange($event)">
+
+    <mat-icon>
+      {{ (post.liked) ? 'favorite': 'favorite_outline'}}
+    </mat-icon>
+
+  </button>
 </div>

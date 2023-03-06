@@ -1,46 +1,57 @@
-<div class="filter__center-media">Toggle button</div>
+<div class="d-flex d-flex--justifyContentCenter">
+  <app-toggle-all-favs
+    [selectedValue]="searchType"
+    (valueChange)="onToggleSearchType($event)"
+  ></app-toggle-all-favs>
+</div>
 
 <br />
-<mat-form-field
-  appearance="outline"
+
+<app-tech-type-select
+  *ngIf="searchType === 'all'"
   class="filter__center-media"
->
-  <mat-label>Technology Type</mat-label>
-  <mat-select [(ngModel)]="selectedTechType"
-  (selectionChange)="onFilterTechnologyChange()">
+  [(selectedTechType)]="selectedTechType"
+  (selectedTechTypeChange)="onFilterTechnologyChange()"
+></app-tech-type-select>
 
-
-  <mat-select-trigger>
-    <div class="d-flex d-flex--alignItemsCenter">
-      <img *ngIf="selectedTechType.icon" [src]="selectedTechType.icon" alt="{{ selectedTechType.viewValue }} logo" height="20" style="margin-right: 0.25em;"/>
-      {{ selectedTechType.viewValue }}
-    </div>
-  </mat-select-trigger>
-
-    <mat-option *ngFor="let type of technologyTypes" [value]="type">
-
-      <div class="d-flex d-flex--alignItemsCenter">
-        <img *ngIf="type.icon != '' " [src]="type.icon" alt="ReactJs logo" height="20" style="margin-right: 0.25em;"/>
-        {{ type.viewValue }}
-      </div>
-
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-<br />
-<br />
-<br />
+<!-- List -->
 <div
   class="posts-results"
   infiniteScroll
   (scrolled)="onScroll()"
   [scrollWindow]="false"
   [infiniteScrollThrottle]="500"
-  [infiniteScrollDistance]="1"
+  [infiniteScrollDistance]="2"
 >
-  <ng-container *ngFor="let post of posts; let i = index">
-    <app-post-card [post]="post"></app-post-card>
+  <!-- All -->
+  <ng-container *ngIf="searchType === 'all'; else showOnlyFavs">
+    <app-post-card
+      *ngFor="let post of posts; let i = index"
+      [post]="post"
+      (postLikedChange)="onPostLikedChange(post)"
+    ></app-post-card>
+
+
+    <div *ngIf="posts.length === 0 && !isLoadingScrolling">
+      <h2>No posts were found</h2>
+    </div>
+
   </ng-container>
+
+  <!-- Favs -->
+  <ng-template #showOnlyFavs>
+    <app-post-card
+      *ngFor="let post of postFavList; let i = index"
+      [post]="post"
+      (postLikedChange)="onPostLikedChange(post)"
+    ></app-post-card>
+
+    <div *ngIf="postFavList.length === 0" >
+      <h2>No favorite post added</h2>
+    </div>
+
+  </ng-template>
 </div>
+
+
+<br />

@@ -3,3 +3,7 @@ export interface TechTypeOption {
   viewValue: string,
   icon: string // ImageURL
 }
+
+export interface SearchType {
+  postFavs: "all" | "favs";
+}

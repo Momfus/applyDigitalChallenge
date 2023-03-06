@@ -1,0 +1,25 @@
+<mat-form-field
+  appearance="outline"
+>
+  <mat-label>Technology Type</mat-label>
+  <mat-select [(ngModel)]="selectedTechType"
+  (selectionChange)="onSelectChange()">
+
+
+  <mat-select-trigger>
+    <div class="d-flex d-flex--alignItemsCenter">
+      <img *ngIf="selectedTechType.icon" [src]="selectedTechType.icon" alt="{{ selectedTechType.viewValue }} logo" height="20" style="margin-right: 0.25em;"/>
+      {{ selectedTechType.viewValue }}
+    </div>
+  </mat-select-trigger>
+
+    <mat-option *ngFor="let type of technologyTypes" [value]="type">
+
+      <div class="d-flex d-flex--alignItemsCenter">
+        <img *ngIf="type.icon != '' " [src]="type.icon" alt="Technology logo" height="20" style="margin-right: 0.25em;"/>
+        {{ type.viewValue }}
+      </div>
+
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -29,7 +29,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class NotFoundComponent {
 
-  message!: string;
+  message: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +38,7 @@ export class NotFoundComponent {
   ) {}
 
   ngOnInit(): void {
-    this.message = this.route.snapshot.data['message'];
+    this.message = this.route.snapshot?.data['message'] || '';
     this.openSnackBar(this.message);
   }
 

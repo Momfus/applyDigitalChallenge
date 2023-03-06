@@ -4,8 +4,8 @@ interface HighlightResult {
   matchedWords: string[];
 }
 
-export interface Hit {
-  created_at: Date;
+export interface Post {
+  created_at: string;
   title: string;
   url: string;
   author: string;
@@ -17,7 +17,7 @@ export interface Hit {
   story_title: string | null;
   story_url: string | null;
   parent_id: number | null;
-  created_at_i: Date;
+  created_at_i: string;
   relevancy_score: number;
   _tags: string[];
   objectID: string;
@@ -26,6 +26,6 @@ export interface Hit {
     url: HighlightResult;
     author: HighlightResult;
   };
-  like: boolean;
+  liked: boolean;
 }
 

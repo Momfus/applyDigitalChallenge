@@ -1,5 +1,5 @@
 .posts-results {
-  max-height: 80vh;
+  max-height: 68vh;
   overflow-y: auto;
   max-width: 1500px;
   margin: auto;
@@ -20,4 +20,5 @@ app-post-card {
     display: flex;
     justify-content: center;
   }
+
 }

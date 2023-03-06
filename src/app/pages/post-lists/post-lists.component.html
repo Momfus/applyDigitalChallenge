@@ -1,4 +1,6 @@
-<div class="filter__center-media">Toggle button</div>
+<div class="d-flex d-flex--justifyContentCenter">
+  <app-toggle-all-favs [selectedValue]="searchType" (valueChange)="onToggleSearchType($event)"></app-toggle-all-favs>
+</div>
 
 <br />
 <mat-form-field
@@ -38,7 +40,7 @@
   (scrolled)="onScroll()"
   [scrollWindow]="false"
   [infiniteScrollThrottle]="500"
-  [infiniteScrollDistance]="1"
+  [infiniteScrollDistance]="2"
 >
   <ng-container *ngFor="let post of posts; let i = index">
     <app-post-card [post]="post"></app-post-card>

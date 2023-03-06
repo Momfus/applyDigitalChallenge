@@ -13,8 +13,9 @@ import { PostListsComponent } from './pages/post-lists/post-lists.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PostCardComponent } from './shared/post-card/post-card.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { SpinnerInterceptor } from './shared/interceptors/spinner.interceptor';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { FormsModule } from '@angular/forms';
+import { ToggleAllFavsComponent } from './shared/toggle-all-favs/toggle-all-favs.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     PostListsComponent,
     NotFoundComponent,
     PostCardComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ToggleAllFavsComponent
   ],
   imports: [
     BrowserModule,

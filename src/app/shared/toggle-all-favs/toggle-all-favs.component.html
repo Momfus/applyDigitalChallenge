@@ -1,0 +1,16 @@
+<div class="d-flex d-flex--space-between" style="width: 14rem; height: 2rem;">
+  <button
+    class="toggle-option"
+    [class.active]="selectedValue === 'all'"
+    (click)="selectOption('all')"
+  >
+    All
+  </button>
+  <button
+    class="toggle-option"
+    [class.active]="selectedValue === 'favs'"
+    (click)="selectOption('favs')"
+  >
+    My Favs
+  </button>
+</div>

@@ -3,7 +3,7 @@ import { PostService } from '../../services/post.service';
 import { Hit } from '../../models/post.model';
 import { PostResultsSearch } from '../../models/post-results.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TechTypeOption } from '../../models/tech-type-option.model';
+import { TechTypeOption, SearchType } from '../../models/tech-type-option.model';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({
@@ -25,6 +25,8 @@ export class PostListsComponent implements OnInit {
   ]
 
   selectedTechType: TechTypeOption = this.technologyTypes[0];
+
+  searchType: SearchType['postFavs'] = 'all';
 
   constructor(
     private postService: PostService,
@@ -56,6 +58,12 @@ export class PostListsComponent implements OnInit {
 
   }
 
+  loadPostsFromLocalStorage(perPage: number = 10) {
+
+    // TODO: load from local storageservice
+
+  }
+
 
   showErrorSnackBar(msg: string) {
     this.snackBar.open(msg, 'Close', {
@@ -77,6 +85,22 @@ export class PostListsComponent implements OnInit {
     this.posts = [];
     this.postService.resetSerch();
     this.loadPostsFromApi( 20, this.selectedTechType.value);
+
+  }
+
+  onToggleSearchType(value: SearchType['postFavs']) {
+
+    console.log(value);
+    if( value === 'all') {
+      this.posts = [];
+      this.postService.resetSerch();
+      this.loadPostsFromApi( 20);
+
+    } else {
+
+      this.loadPostsFromLocalStorage(20);
+
+    }
 
   }
 

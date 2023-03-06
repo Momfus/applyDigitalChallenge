@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --brownish-grey: #6b6b6b;
+  --azure: #1797ff;
 }
 
 html,
@@ -36,6 +37,10 @@ app-root {
   align-items: center;
 }
 
+.d-flex--justifyContentCenter {
+  justify-content: center;
+}
+
 .d-flex--space-between {
   justify-content: space-between;
 }
@@ -51,8 +56,6 @@ app-root {
   justify-content: center;
 
 }
-
-
 
 /* Scroll style */
 ::-webkit-scrollbar {
@@ -75,4 +78,14 @@ app-root {
 * {
   scrollbar-width: 6px;
   scrollbar-color: #555 #eee;
+}
+
+/*Media*/
+@media (min-width: 900px) {
+
+  div.container {
+    margin-right: 10em;
+    margin-left: 10em;
+  }
+
 }

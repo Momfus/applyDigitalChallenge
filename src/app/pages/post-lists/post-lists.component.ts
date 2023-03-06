@@ -4,7 +4,6 @@ import { Hit } from '../../models/post.model';
 import { PostResultsSearch } from '../../models/post-results.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TechTypeOption, SearchType } from '../../models/tech-type-option.model';
-import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-post-lists',
@@ -35,7 +34,16 @@ export class PostListsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const savedSelectedType = this.postService.loadFilterTechnologySearch(this.selectedTechType);
+    const techType = this.technologyTypes.find(type => type.value === savedSelectedType.value);
+    this.selectedTechType = techType || this.selectedTechType;
+
     this.loadPostsFromApi(20);
+
+  }
+
+  ngAfterViewInit( ) {
+
   }
 
   loadPostsFromApi( perPage: number = 10, technologyFilter='') {
@@ -81,6 +89,7 @@ export class PostListsComponent implements OnInit {
 
   onFilterTechnologyChange() {
 
+    this.postService.saveFilterTechnologySearch(this.selectedTechType);
 
     this.posts = [];
     this.postService.resetSerch();

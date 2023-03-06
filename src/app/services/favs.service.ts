@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavsService {
 
-  postFavsList: Post[] = []
+  private _postFavsList: Post[] = []
+
+  postFavoritesList$: Subject<Post[]> = new Subject<Post[]>();
 
   constructor() {
-    this.postFavsList = this.getFavs();
+    this._postFavsList = this.getFavs();
+    this.postFavoritesList$.next(this._postFavsList);
   }
 
-  getFavs(): Post[] {
+  public getFavs(): Post[] {
 
-    const favsJson = localStorage.getItem('favs');
+    const favsJson = localStorage.getItem('postFavsList');
 
     if (favsJson) {
       return JSON.parse(favsJson);
@@ -27,23 +31,27 @@ export class FavsService {
   addPostToFavs(post: Post) {
 
     // Just in case the post was already added
-    const isPostExists = this.postFavsList.findIndex(p => p.objectID === post.objectID);
+    const isPostExists = this._postFavsList.findIndex(p => p.objectID === post.objectID);
     if (isPostExists !== -1) {
       return
     }
 
-    this.postFavsList.push(post);
-    localStorage.setItem('postFavsList', JSON.stringify(this.postFavsList));
+    this._postFavsList.push(post);
+    localStorage.setItem('postFavsList', JSON.stringify(this._postFavsList));
+
+    this.postFavoritesList$.next(this._postFavsList);
 
   }
 
   removePostFromFavs( objectID: string ) {
 
-    const postIndex = this.postFavsList.findIndex(p => p.objectID === objectID);
+    const postIndex = this._postFavsList.findIndex(p => p.objectID === objectID);
     if( postIndex !== -1 ) {
 
-      this.postFavsList.splice(postIndex, 1);
-      localStorage.setItem('postFavsList', JSON.stringify(this.postFavsList));
+      this._postFavsList.splice(postIndex, 1);
+      localStorage.setItem('postFavsList', JSON.stringify(this._postFavsList));
+
+      this.postFavoritesList$.next(this._postFavsList);
 
     }
 

@@ -4,6 +4,7 @@
 
 <br />
 <mat-form-field
+  *ngIf="searchType === 'all'"
   appearance="outline"
   class="filter__center-media"
 >
@@ -42,7 +43,13 @@
   [infiniteScrollThrottle]="500"
   [infiniteScrollDistance]="2"
 >
-  <ng-container *ngFor="let post of posts; let i = index">
-    <app-post-card [post]="post" (postLikedChange)="onPostLikedChange(post)"></app-post-card>
+  <ng-container *ngIf="searchType === 'all'; else showOnlyFavs">
+    <app-post-card *ngFor="let post of posts; let i = index" [post]="post" (postLikedChange)="onPostLikedChange(post)"></app-post-card>
   </ng-container>
+
+  <ng-template #showOnlyFavs>
+    <app-post-card *ngFor="let post of postFavList; let i = index" [post]="post" (postLikedChange)="onPostLikedChange(post)"></app-post-card>
+  </ng-template>
 </div>
+
+<br>
